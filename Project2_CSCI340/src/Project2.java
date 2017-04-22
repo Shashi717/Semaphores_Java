@@ -24,12 +24,23 @@ public class Project2{
 			FamilyMember member = getTurn(randomNum);
 			
 			Thread newAction = new Thread(new Action(member));
-			threadList.add(newAction);
+			//threadList.add(newAction);
+			
+			
 			newAction.start();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(200);
 			}
 			catch (InterruptedException e) {}
+
+		
+//				
+//				if (newAction.getState().equals(Thread.State.WAITING)) {
+//					System.out.println("waiting");
+//					newAction.interrupt();
+//				}
+		
+	
 		
 		}	
 		
