@@ -10,66 +10,59 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;;
 
-public class Project2{
-	
+public class Project2 {
+
 	ArrayList<Thread> threadList = new ArrayList<Thread>();
 
 	public Project2() {
 	}
-	
+
 	public void runSnacking(int turns) throws InterruptedException {
-	
-		for(int i=0; i<turns; i++) {
+
+		for (int i = 0; i < turns; i++) {
 			int randomNum = getRandomNum(3);
 			FamilyMember member = getTurn(randomNum);
-			
+
 			Thread newAction = new Thread(new Action(member));
 			threadList.add(newAction);
-			
-			
+
 			newAction.start();
 			try {
 				Thread.sleep(100);
-			}
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
-	              return;
+				return;
 			}
 
-		for(Thread thread: threadList) {
-			if (thread.getState().equals(Thread.State.WAITING)) {
-				System.out.println("waiting");
-				thread.interrupt();
-				//newAction.co
-			}
-		}
-			
-				
-				
-		
+			for (Thread thread : threadList) {
+				if (thread.getState().equals(Thread.State.WAITING)) {
+					//System.out.println(member + " is waiting");
+					thread.interrupt();
 	
-		
-		}	
-		
+				}
+			}
+
+		}
+
 	}
-	
-	// random family member turn generator
-		private FamilyMember getTurn(int randomNum) {
-			if (randomNum == 0) {
-				return FamilyMember.SON;
-			} else if (randomNum == 1) {
-				return FamilyMember.DAUGHTER;
-			} else {
-				return FamilyMember.FATHER;
-			}
-		}
 
-		// random number generator
-		public static int getRandomNum(int items) {
-			Random rand = new Random();
-			int n = rand.nextInt(items);
-			return n;
+	// random family member turn generator
+	private FamilyMember getTurn(int randomNum) {
+		if (randomNum == 0) {
+			return FamilyMember.SON;
+		} else if (randomNum == 1) {
+			return FamilyMember.DAUGHTER;
+		} else {
+			return FamilyMember.FATHER;
 		}
+	}
+
+	// random number generator
+	public static int getRandomNum(int items) {
+		Random rand = new Random();
+		int n = rand.nextInt(items);
+		return n;
+	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 

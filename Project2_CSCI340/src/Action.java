@@ -13,8 +13,8 @@ public class Action implements Runnable {
 
 	public void run() {
 		
-		System.out.println("--------------");
-		System.out.println(familyMember.toString()+"'s Turn");
+		//System.out.println("--------------");
+		System.out.println(familyMember.toString()+" gets to the plate\n");
 		
 		if (familyMember.equals(FamilyMember.FATHER)) {
 			fatherGetsToPlate();
@@ -23,32 +23,6 @@ public class Action implements Runnable {
 		} else {
 			daughterGetsToPlate();
 		}
-	
-		
-//		while (!Thread.currentThread().isInterrupted()) {
-//	          // continue processing
-//			if (familyMember.equals(FamilyMember.FATHER)) {
-//				fatherGetsToPlate();
-//			} else if (familyMember.equals(FamilyMember.SON)) {
-//				sonGetsToPlate();
-//			} else {
-//				daughterGetsToPlate();
-//			}
-//	          try {
-//	              Thread.sleep(100);
-//	          } catch (InterruptedException e) {
-//	              // good practice
-//	              Thread.currentThread().interrupt();
-//	              return;
-//	          }
-//		}
-	
-		
-//		if(Thread.currentThread().isInterrupted()) {
-//			fullPlateSemaphore.v();
-//			return;
-//		}
-
 		
 	}
 
@@ -61,7 +35,7 @@ public class Action implements Runnable {
 			System.out.println("   Father puts an apple on the plate");
 			appleSemaphore.v();
 		} else {
-			System.out.println("   Father puts an orange on the plate");
+			System.out.println("   Father puts an orange on the plate\n");
 			orangeSemaphore.v();
 		}
 
@@ -73,7 +47,7 @@ public class Action implements Runnable {
 		System.out.println("   There is an orange");
 		System.out.println("   Son grabs an orange");
 		emptyPlateSemaphore.v();
-		System.out.println("   Plate becomes empty");
+		System.out.println("   Plate becomes empty\n");
 	}
 
 	// method for daughter reaching the plate to grab an apple
@@ -82,7 +56,7 @@ public class Action implements Runnable {
 		System.out.println("   There is an apple");
 		System.out.println("   Daughter grabs an apple");
 		emptyPlateSemaphore.v();
-		System.out.println("   Plate becomes empty");
+		System.out.println("   Plate becomes empty\n");
 
 	}
 	
