@@ -4,9 +4,11 @@ public class Action implements Runnable {
 
 	private FamilyMember familyMember;
 	
-	//semaphore to l
+	//semaphore for empty plate
 	private static Semaphore emptyPlateSemaphore = new Semaphore(1);
+	//semaphore for an orange on the plate
 	private static Semaphore orangeSemaphore = new Semaphore(0);
+	//semaphore for an apple on the plate
 	private static Semaphore appleSemaphore = new Semaphore(0);
 
 	public Action(FamilyMember familyMember) {
