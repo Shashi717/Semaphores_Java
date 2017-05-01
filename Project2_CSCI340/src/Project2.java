@@ -17,30 +17,38 @@ public class Project2 {
 	public Project2() {
 	}
 
+	//method to simulate the snack time
 	public void runSnacking(int turns) throws InterruptedException {
 
+		//for-loop to create the number of thread passed as the input
 		for (int i = 0; i < turns; i++) {
 			int randomNum = getRandomNum(3);
 			FamilyMember member = getTurn(randomNum);
 
+			//creating a new thread - Simulates a family member reaching the plate
 			Thread newAction = new Thread(new Action(member));
 			threadList.add(newAction);
-
 			newAction.start();
+			
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 				return;
 			}
+			
+			
+//			if (Thread.currentThread().getState().equals(Thread.State.WAITING)) {
+//				Thread.currentThread().interrupt();
+//			}
 
-			for (Thread thread : threadList) {
-				if (thread.getState().equals(Thread.State.WAITING)) {
-					//System.out.println(member + " is waiting");
-					thread.interrupt();
-	
-				}
-			}
+//			for (Thread thread : threadList) {
+//				if (thread.getState().equals(Thread.State.WAITING)) {
+//					
+//					thread.interrupt();
+//	
+//				}
+//			}
 
 		}
 
@@ -57,7 +65,7 @@ public class Project2 {
 		}
 	}
 
-	// random number generator
+	// random integer generator
 	public static int getRandomNum(int items) {
 		Random rand = new Random();
 		int n = rand.nextInt(items);
@@ -67,7 +75,10 @@ public class Project2 {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		Project2 trial = new Project2();
-		trial.runSnacking(10);
+		
+		//10 turns for snacking
+		int numOfTurns = 10;
+		trial.runSnacking(numOfTurns);
 
 	}
 

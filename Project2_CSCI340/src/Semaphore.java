@@ -1,3 +1,4 @@
+//Semaphore class (Binary Semaphore)
 public class Semaphore {
 	
    private int value;
