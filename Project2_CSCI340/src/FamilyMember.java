@@ -1,4 +1,4 @@
-
+//enum family member
 public enum FamilyMember {
 
 	FATHER,
