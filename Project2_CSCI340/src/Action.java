@@ -10,11 +10,13 @@ public class Action implements Runnable {
 	private static Semaphore orangeSemaphore = new Semaphore(0);
 	//semaphore for an apple on the plate
 	private static Semaphore appleSemaphore = new Semaphore(0);
+	
+	
 
 	public Action(FamilyMember familyMember) {
 		this.familyMember = familyMember;
 	}
-
+	
 	//run method for the thread
 	public void run() {
 		
@@ -37,6 +39,8 @@ public class Action implements Runnable {
 		
 		//wait until the plate gets empty
 		emptyPlateSemaphore.p();
+	
+		
 		System.out.println("   Plate is empty");
 		
 		if (fruit.equals(Fruit.APPLE)) {
@@ -75,6 +79,7 @@ public class Action implements Runnable {
 		
 		//wait on apple semaphore
 		appleSemaphore.p();
+		
 		System.out.println("   There is an apple");
 		System.out.println("   Daughter grabs the apple");
 		
