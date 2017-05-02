@@ -10,53 +10,71 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;;
 
-public class Project2{
-	
+public class Project2 {
+
 	ArrayList<Thread> threadList = new ArrayList<Thread>();
 
 	public Project2() {
 	}
-	
+
+	//method to simulate the snack time
+	@SuppressWarnings("deprecation")
 	public void runSnacking(int turns) throws InterruptedException {
-	
-		for(int i=0; i<turns; i++) {
+
+		//for-loop to create the number of thread passed as the input
+		for (int i = 0; i < turns; i++) {
 			int randomNum = getRandomNum(3);
 			FamilyMember member = getTurn(randomNum);
-			
+
+			//creating a new thread - Simulates a family member reaching the plate
 			Thread newAction = new Thread(new Action(member));
 			threadList.add(newAction);
 			newAction.start();
+			
 			try {
 				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				return;
 			}
-			catch (InterruptedException e) {}
-		
-		}	
-		
-	}
+
+			for (Thread thread : threadList) {
+				if (thread.getState().equals(Thread.State.WAITING)) {
+					
+					thread.stop();
 	
-	// random family member turn generator
-		private FamilyMember getTurn(int randomNum) {
-			if (randomNum == 0) {
-				return FamilyMember.SON;
-			} else if (randomNum == 1) {
-				return FamilyMember.DAUGHTER;
-			} else {
-				return FamilyMember.FATHER;
+				}
 			}
+
 		}
 
-		// random number generator
-		public static int getRandomNum(int items) {
-			Random rand = new Random();
-			int n = rand.nextInt(items);
-			return n;
+	}
+
+	// random family member turn generator
+	private FamilyMember getTurn(int randomNum) {
+		if (randomNum == 0) {
+			return FamilyMember.SON;
+		} else if (randomNum == 1) {
+			return FamilyMember.DAUGHTER;
+		} else {
+			return FamilyMember.FATHER;
 		}
+	}
+
+	// random integer generator
+	public static int getRandomNum(int items) {
+		Random rand = new Random();
+		int n = rand.nextInt(items);
+		return n;
+	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		Project2 trial = new Project2();
-		trial.runSnacking(10);
+		
+		//10 turns for snacking
+		int numOfTurns = 10;
+		trial.runSnacking(numOfTurns);
 
 	}
 
