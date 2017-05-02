@@ -18,6 +18,7 @@ public class Project2 {
 	}
 
 	//method to simulate the snack time
+	@SuppressWarnings("deprecation")
 	public void runSnacking(int turns) throws InterruptedException {
 
 		//for-loop to create the number of thread passed as the input
@@ -36,19 +37,14 @@ public class Project2 {
 				Thread.currentThread().interrupt();
 				return;
 			}
-			
-			
-//			if (Thread.currentThread().getState().equals(Thread.State.WAITING)) {
-//				Thread.currentThread().interrupt();
-//			}
 
-//			for (Thread thread : threadList) {
-//				if (thread.getState().equals(Thread.State.WAITING)) {
-//					
-//					thread.interrupt();
-//	
-//				}
-//			}
+			for (Thread thread : threadList) {
+				if (thread.getState().equals(Thread.State.WAITING)) {
+					
+					thread.stop();
+	
+				}
+			}
 
 		}
 
